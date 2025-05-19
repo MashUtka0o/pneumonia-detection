@@ -10,14 +10,14 @@ and pneumonia.
 
 **Model Card Submission: Friday, June 6, 2025, 11:59 PM CEST**
 
-Model Card (max. 3 pages) with: objective, data, model, training, evaluation,
-limitations  
+Model Card (max. 3 pages) with: objective, data, model, training, evaluation, limitations 
+[Model Card](https://docs.google.com/document/d/1begDbBezvR3kWWZCJEFZHgpqFSggf6WnROFrXBSmaO0/edit?usp=sharing)
 Code (e.g., via GitHub or Colab)  
 
 5min group presentation  23.06.- 07.07.
 
 # Data
-[Kaggle Dataset] (https://www.kaggle.com/datasets/paultimothymooney/chest-xray-pneumonia)
+[Kaggle Dataset](https://www.kaggle.com/datasets/paultimothymooney/chest-xray-pneumonia)
 
 # Contributor
 Christopher Reinard Kohar 22210239   
