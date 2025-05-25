@@ -113,7 +113,7 @@ if __name__ == "__main__":
 
 
     # Save the trained model
-    torch.save(model.state_dict(), "./models/resnet18_pneumonia.pth")
+    torch.save(model.state_dict(), "./models/resnet18_pneumonia2.pth")
     print("Model saved as resnet18_pneumonia.pth")
 
     
