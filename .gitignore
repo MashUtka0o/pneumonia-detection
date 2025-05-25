@@ -172,3 +172,7 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+
+chest_xray
+chest_xray_combined
+chest_xray_split
