@@ -31,7 +31,7 @@ if __name__ == "__main__":
 
 
     criterion = nn.CrossEntropyLoss()
-    epoch = 15
+    epoch = 20
 
     # Replace final FC layer (3 output classes)
     num_ftrs = model.fc.in_features
@@ -115,3 +115,5 @@ if __name__ == "__main__":
     # Save the trained model
     torch.save(model.state_dict(), "./models/resnet18_pneumonia.pth")
     print("Model saved as resnet18_pneumonia.pth")
+
+    
