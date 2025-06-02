@@ -46,7 +46,7 @@ def split_train_test():
     random.seed(42)
     # Configuration
     original_dir = './chest_xray_combined'  # Path to the combined dataset
-    output_dir = './chest_xray_split'
+    output_dir = './chest_xray_split2'
     classes = ['NORMAL', 'PNEUMONIA_BACTERIA', 'PNEUMONIA_VIRUS']
     splits = ['train', 'val', 'test']
     split_ratios = [0.7, 0.15, 0.15]  # train, val, test
@@ -78,3 +78,4 @@ def split_train_test():
 
     print("Dataset successfully split into train/val/test!")
 
+split_train_test()
