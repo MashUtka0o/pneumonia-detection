@@ -1,3 +1,6 @@
+#Implementation of IntegradedGradient checking the first image in test
+#https://www.tensorflow.org/tutorials/interpretability/integrated_gradients
+
 import matplotlib.pylab as plt
 import numpy as np
 import tensorflow as tf
