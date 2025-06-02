@@ -8,19 +8,25 @@ from torchvision.models import ResNet18_Weights
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-transform = transforms.Compose([
-    transforms.RandomResizedCrop(224),
+train_transform = transforms.Compose([
+    transforms.RandomResizedCrop(224), # Randomly crop the image to 224x224
     transforms.RandomHorizontalFlip(),
     transforms.ToTensor(),
     transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
 ])
 
+validation_transform = transforms.Compose([
+    transforms.Resize((224, 224)), # Resize the image to 224x224
+    transforms.ToTensor(),
+    transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
+])
 
-data_dir = './chest_xray_split'  # root folder where train/val/test folders are
 
-train_dataset = datasets.ImageFolder(root=f'{data_dir}/train', transform=transform)
-val_dataset   = datasets.ImageFolder(root=f'{data_dir}/val', transform=transform)
-test_dataset  = datasets.ImageFolder(root=f'{data_dir}/test', transform=transform)
+data_dir = './chest_xray_split2'  # root folder where train/val/test folders are
+
+train_dataset = datasets.ImageFolder(root=f'{data_dir}/train', transform=train_transform)
+val_dataset   = datasets.ImageFolder(root=f'{data_dir}/val', transform=validation_transform)
+test_dataset  = datasets.ImageFolder(root=f'{data_dir}/test', transform=validation_transform)
 
 train_loader = DataLoader(train_dataset, batch_size=32, shuffle=True)
 val_loader   = DataLoader(val_dataset, batch_size=32, shuffle=False)
@@ -111,7 +117,7 @@ if __name__ == "__main__":
 
 
     # Save the trained model
-    torch.save(model.state_dict(), "./models/resnet18_pneumonia2.pth")
-    print("Model saved as resnet18_pneumonia.pth")
+    torch.save(model.state_dict(), "./models/resnet18_pneumonia3.pth")
+    print("Model saved as resnet18_pneumonia3.pth")
 
     
