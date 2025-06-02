@@ -43,6 +43,7 @@ def combine_dataset():
 
 
 def split_train_test():
+    random.seed(42)
     # Configuration
     original_dir = './chest_xray_combined'  # Path to the combined dataset
     output_dir = './chest_xray_split'

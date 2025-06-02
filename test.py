@@ -49,12 +49,15 @@ def evaluate_model(model, test_loader):
     pneumonia_accuracy = np.mean(np.array(binary_labels) == np.array(binary_preds))
 
     cm = confusion_matrix(all_labels, all_preds)
+    print(f'Accuracy: {accuracy * 100:.2f}%')
+    print(f'Pneumonia Detection Accuracy: {pneumonia_accuracy * 100:.2f}%')
+    print('Confusion Matrix:\n', cm)
+    print(f'F1 Score: {f1:.4f}')
     return accuracy, pneumonia_accuracy, cm, f1
 
 data_dir = './chest_xray_split' 
 transform = transforms.Compose([
-    transforms.RandomResizedCrop(224),
-    transforms.RandomHorizontalFlip(),
+    transforms.Resize((224, 224)),
     transforms.ToTensor(),
     transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
 ])
