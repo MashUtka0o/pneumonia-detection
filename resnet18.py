@@ -29,14 +29,15 @@ test_loader  = DataLoader(test_dataset, batch_size=32, shuffle=False)
 if __name__ == "__main__":
     model = models.resnet18(weights=ResNet18_Weights.DEFAULT)
 
-
     criterion = nn.CrossEntropyLoss()
     epoch = 20
 
     # Replace final FC layer (3 output classes)
     num_ftrs = model.fc.in_features
-    model.fc = nn.Linear(num_ftrs, 3)  # ['NORMAL', 'PNEUMONIA_BACTERIA', 'PNEUMONIA_VIRUS']
+    model.fc = nn.Linear(num_ftrs, 3)  
+    # ['NORMAL', 'PNEUMONIA_BACTERIA', 'PNEUMONIA_VIRUS']
 
+    # Optionally, freeze the model parameters if you want to fine-tune only the final layer
     # for param in model.parameters():
     #     param.requires_grad = False
 
@@ -46,7 +47,6 @@ if __name__ == "__main__":
     model = model.to(device)
 
     for epoch in range(epoch):
-        # ===== Training =====
         model.train()
         train_loss = 0.0
         train_correct = 0
@@ -68,8 +68,6 @@ if __name__ == "__main__":
 
         avg_train_loss = train_loss / len(train_loader)
         train_acc = 100 * train_correct / total_train
-        
-        # ===== Validation =====
 
         model.eval()
         val_loss = 0.0
