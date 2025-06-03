@@ -4,10 +4,10 @@ from PIL import Image
 import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
 
-base_dir = 'mixed'
+base_dir = 'mixed' # Use the mixed dataset, not the original one
 class_names = ['NORMAL', 'PNEUMONIA']
 
-def resize_rgb(categories, path):
+def resize_rgb(categories): # Resizing the pictures and converting into RGB so they all have the same properties
     data = []
     labels = []
     for category in categories:
@@ -26,16 +26,17 @@ def resize_rgb(categories, path):
     print("Data shape:", data.shape)
     print("Unique labels and counts:", np.unique(labels, return_counts=True))
 
-    np.savez('chest_xray_combined.npz', data=data, labels=labels)
-    print("Data saved to 'chest_xray_combined.npz'")
+    np.savez('./mobileNetData/chest_xray_combined_mobileNet.npz', data=data, labels=labels) # I am saving a dataset in npz, so it is easier to work with it later
+    print("Data saved to 'chest_xray_combined_mobileNet.npz'")
 
-dataset = np.load('chest_xray_combined.npz')
+resize_rgb(class_names)
+dataset = np.load('./mobileNetData/chest_xray_combined_mobileNet.npz')
 
 new_data = dataset['data']
 new_labels = dataset['labels']
 unique_labels, counts = np.unique(new_labels, return_counts=True)
 
-def pneumonia_vs_normal(): # checks how much of pneumonia and normal data are there
+def pneumonia_vs_normal(): # checks how much of pneumonia and normal data are there in og dataset
     for name, count in zip(class_names, counts):
         print(f"{name}: {count} images")
 
@@ -48,9 +49,9 @@ def pneumonia_vs_normal(): # checks how much of pneumonia and normal data are th
     plt.tight_layout()
     plt.show()
 
-def data_split():
+def data_split(): # splitting the data
     data_train, data_temp, labels_train, labels_temp = train_test_split(
-        new_data, new_labels, test_size=0.3, stratify=new_labels, random_state=21) # 70-15-15 split
+        new_data, new_labels, test_size=0.3, stratify=new_labels, random_state=21) # I use 70-15-15 split
     data_val, data_test, labels_val, labels_test = train_test_split(
         data_temp, labels_temp, test_size=0.5, stratify=labels_temp, random_state=21)
 
@@ -58,7 +59,7 @@ def data_split():
     print(f"Validation: {len(data_val)}")
     print(f"Test: {len(data_test)}")
 
-    np.savez('chest_xray_split.npz',
+    np.savez('./mobileNetData/chest_xray_split_mobileNet.npz', # save the new dataset with train/test/val split
              data_train=data_train, labels_train=labels_train,
              data_val=data_val, labels_val=labels_val,
              data_test=data_test, labels_test=labels_test)
@@ -76,7 +77,7 @@ def distribution_check(disease, set_name): # check, so the distribution of norma
 
 data_split()
 
-split = np.load('chest_xray_split.npz')
+split = np.load('./mobileNetData/chest_xray_split_mobileNet.npz')
 distribution_check(split['labels_train'], "Train")
 distribution_check(split['labels_val'], "Validation")
 distribution_check(split['labels_test'], "Test")
