@@ -1,3 +1,7 @@
+# Class: Deep Learning: Pneumonia Classification
+# This Script Trains a ResNet18 model on the Chest X-Ray dataset to classify pneumonia types.
+# This script assumes you have already preprocessed the dataset and split it into train, validation, and test sets.
+
 import torch
 from torchvision import datasets, transforms, models
 from torch.utils.data import DataLoader
@@ -6,6 +10,7 @@ import torch.optim as optim
 from torch.optim import lr_scheduler
 from torchvision.models import ResNet18_Weights
 
+# GPU Device
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 train_transform = transforms.Compose([
@@ -21,18 +26,38 @@ validation_transform = transforms.Compose([
     transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
 ])
 
+# Dataset Directory in the format:
+# datasetdirectory
+# ├── train
+# │   ├── NORMAL
+# │   ├── PNEUMONIA_BACTERIA
+# │   └── PNEUMONIA_VIRUS
+# ...
+data_dir = './chest_xray_split2'
 
-data_dir = './chest_xray_split2'  # root folder where train/val/test folders are
-
+# Load datasets
 train_dataset = datasets.ImageFolder(root=f'{data_dir}/train', transform=train_transform)
 val_dataset   = datasets.ImageFolder(root=f'{data_dir}/val', transform=validation_transform)
 test_dataset  = datasets.ImageFolder(root=f'{data_dir}/test', transform=validation_transform)
 
+# Create DataLoaders
 train_loader = DataLoader(train_dataset, batch_size=32, shuffle=True)
 val_loader   = DataLoader(val_dataset, batch_size=32, shuffle=False)
 test_loader  = DataLoader(test_dataset, batch_size=32, shuffle=False)
 
+"""
+Main Function
+Training Parameters:
+    Epochs: 20
+    Batch Size: 32
+    Learning Rate: 1e-4
+    Weight Decay: 1e-4
+    Optimizer: Adam
+    Scheduler: StepLR with step size 7 and gamma 0.1
+"""
+
 if __name__ == "__main__":
+    # Load pre-trained ResNet18 model
     model = models.resnet18(weights=ResNet18_Weights.DEFAULT)
 
     criterion = nn.CrossEntropyLoss()
@@ -43,9 +68,6 @@ if __name__ == "__main__":
     model.fc = nn.Linear(num_ftrs, 3)  
     # ['NORMAL', 'PNEUMONIA_BACTERIA', 'PNEUMONIA_VIRUS']
 
-    # Optionally, freeze the model parameters if you want to fine-tune only the final layer
-    # for param in model.parameters():
-    #     param.requires_grad = False
 
     optimizer = optim.Adam(model.parameters(), lr=1e-4, weight_decay=1e-4)
     scheduler = lr_scheduler.StepLR(optimizer, step_size=7, gamma=0.1)
@@ -53,6 +75,7 @@ if __name__ == "__main__":
     model = model.to(device)
 
     for epoch in range(epoch):
+        # Training
         model.train()
         train_loss = 0.0
         train_correct = 0
@@ -75,6 +98,7 @@ if __name__ == "__main__":
         avg_train_loss = train_loss / len(train_loader)
         train_acc = 100 * train_correct / total_train
 
+        # Validation
         model.eval()
         val_loss = 0.0
         val_correct = 0
@@ -100,7 +124,7 @@ if __name__ == "__main__":
             f"Train Loss: {avg_train_loss:.4f}, Train Acc: {train_acc:.2f}% | "
             f"Val Loss: {avg_val_loss:.4f}, Val Acc: {val_acc:.2f}%")
 
-
+    # Testing
     model.eval()
     correct = 0
     total = 0
@@ -114,7 +138,6 @@ if __name__ == "__main__":
             correct += (predicted == labels).sum().item()
 
     print(f"Test Accuracy: {100 * correct / total:.2f}%")
-
 
     # Save the trained model
     torch.save(model.state_dict(), "./models/resnet18_pneumonia3.pth")
