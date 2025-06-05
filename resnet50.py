@@ -1,5 +1,5 @@
 # Class: Deep Learning: Pneumonia Classification
-# This Script Trains a ResNet18 model on the Chest X-Ray dataset to classify pneumonia types.
+# This Script Trains a ResNet50 model on the Chest X-Ray dataset to classify pneumonia types.
 # This script assumes you have already preprocessed the dataset and split it into train, validation, and test sets.
 
 import torch
@@ -8,7 +8,7 @@ from torch.utils.data import DataLoader
 import torch.nn as nn
 import torch.optim as optim
 from torch.optim import lr_scheduler
-from torchvision.models import ResNet18_Weights
+from torchvision.models import ResNet50_Weights
 
 # GPU Device
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -57,7 +57,7 @@ Training Parameters:
 """
 
 if __name__ == "__main__":
-    # Load pre-trained ResNet18 model
+    # Load pre-trained ResNet50 model
     model = models.resnet50(weights=ResNet50_Weights.DEFAULT)
 
     criterion = nn.CrossEntropyLoss()
