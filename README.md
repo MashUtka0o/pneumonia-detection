@@ -22,7 +22,7 @@ Code (e.g., via GitHub or Colab)
 
 # Contributor
 Christopher Reinard Kohar 22210239   
-Harah Amit Doshi 22203459   
+Harsh Amit Doshi 22203459   
 Maria Matyukhina 22210692   
 Marlis Wagner 22301867  
 
@@ -69,3 +69,16 @@ The diagnoses for the images were graded by two expert physicians before being c
 ## Caveats and Recommendations
 
 ## Quantitative Analyses
+
+### Resnet50
+Confusion Matrix:
+![Confusion Matrix for resent50](./images/resnet50ConfusionMetrics.png)
+Error Metrics:
+Accuracy: 95.23%
+Pneumonia Detection Accuracy: 95.23%
+Binary Accuracy: 0.9523
+Precision: 0.9934
+Recall (Sensitivity): 0.9409
+Specificity: 0.9832
+F1 Score: 0.9665
+Matthews Correlation Coefficient (MCC): 0.8882
