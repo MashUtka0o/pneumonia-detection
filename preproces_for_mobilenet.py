@@ -1,16 +1,37 @@
 import os
 import numpy as np
+import shutil
 from PIL import Image
 import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
 
-base_dir = 'mixed' # Use the mixed dataset, not the original one
 class_names = ['NORMAL', 'PNEUMONIA']
 
-def resize_rgb(categories): # Resizing the pictures and converting into RGB so they all have the same properties
+def mix_data():
+    original_dir = 'chest_xray'
+    target_dir = 'mixed'
+
+    for category in class_names:
+        os.makedirs(os.path.join(target_dir, category), exist_ok=True)
+
+    splits = ['train', 'test', 'val']
+    for split in splits:
+        for category in class_names:
+            src_folder = os.path.join(original_dir, split, category)
+            dst_folder = os.path.join(target_dir, category)
+            for filename in os.listdir(src_folder):
+                if filename.endswith('.DS_Store'):
+                    continue
+                src_file = os.path.join(src_folder, filename)
+                dst_file = os.path.join(dst_folder, f"{split}_{filename}")
+                shutil.copy(src_file, dst_file)  # Copying instead of moving to avoid destroying original dataset
+
+base_dir = 'mixed' # Use the mixed dataset from now on, not the original one
+
+def resize_rgb(): # Resizing the pictures and converting into RGB so they all have the same properties
     data = []
     labels = []
-    for category in categories:
+    for category in class_names:
         folder = os.path.join(base_dir, category)
         for filename in os.listdir(folder):
             filepath = os.path.join(folder, filename)
@@ -25,11 +46,12 @@ def resize_rgb(categories): # Resizing the pictures and converting into RGB so t
 
     print("Data shape:", data.shape)
     print("Unique labels and counts:", np.unique(labels, return_counts=True))
-
+    os.makedirs('./mobileNetData', exist_ok=True)
     np.savez('./mobileNetData/chest_xray_combined_mobileNet.npz', data=data, labels=labels) # I am saving a dataset in npz, so it is easier to work with it later
-    print("Data saved to 'chest_xray_combined_mobileNet.npz'")
+    print("Data saved to './mobileNetData/chest_xray_combined_mobileNet.npz'")
 
-resize_rgb(class_names)
+#mix_data() # mix it up
+resize_rgb() # resize and transfer to rgb for better consistency and future training
 dataset = np.load('./mobileNetData/chest_xray_combined_mobileNet.npz')
 
 new_data = dataset['data']
@@ -75,9 +97,9 @@ def distribution_check(disease, set_name): # check, so the distribution of norma
         print(f"  {label_name}: {count} ({pct:.2f}%)")
     print(f"  Total: {total}")
 
-data_split()
+data_split() # split it up again with different train-val-test split size
 
 split = np.load('./mobileNetData/chest_xray_split_mobileNet.npz')
-distribution_check(split['labels_train'], "Train")
+distribution_check(split['labels_train'], "Train") # check the distribution
 distribution_check(split['labels_val'], "Validation")
 distribution_check(split['labels_test'], "Test")
