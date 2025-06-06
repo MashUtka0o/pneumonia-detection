@@ -71,8 +71,8 @@ The diagnoses for the images were graded by two expert physicians before being c
 ## Quantitative Analyses
 
 ### Resnet50
-Confusion metrics:
-
+Confusion Matrix:
+![Confusion Matrix for resent50](./images/resnet50ConfusionMetrics.png)
 Error Metrics:
 Accuracy: 95.23%
 Pneumonia Detection Accuracy: 95.23%
