@@ -41,7 +41,7 @@ def train_model(split): # training the model
 
     history = model.fit(x_train, y_train_cat,
                         validation_data=(x_val, y_val_cat),
-                        epochs=10,
+                        epochs=20,
                         batch_size=32,
                         callbacks=[checkpoint]) # using checkpoint for callbacks
     test_loss, test_acc = model.evaluate(x_test, y_test_cat)
