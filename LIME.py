@@ -71,7 +71,7 @@ def batch_predict(images):
     return probs.cpu().numpy()
 
 # Load and show image
-original_img = load_image('Data/chest_xray/train/NORMAL/IM-0115-0001.jpeg')
+original_img = load_image(r'Data\chest_xray\train\PNEUMONIA\person843_virus_1485.jpeg')
 plt.imshow(original_img)
 plt.axis('off')
 plt.show()
