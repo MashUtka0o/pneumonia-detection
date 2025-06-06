@@ -50,7 +50,7 @@ def resize_rgb(): # Resizing the pictures and converting into RGB so they all ha
     np.savez('./mobileNetData/chest_xray_combined_mobileNet.npz', data=data, labels=labels) # I am saving a dataset in npz, so it is easier to work with it later
     print("Data saved to './mobileNetData/chest_xray_combined_mobileNet.npz'")
 
-#mix_data() # mix it up
+mix_data() # mix it up
 resize_rgb() # resize and transfer to rgb for better consistency and future training
 dataset = np.load('./mobileNetData/chest_xray_combined_mobileNet.npz')
 
