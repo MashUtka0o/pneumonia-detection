@@ -29,6 +29,11 @@ Marlis Wagner 22301867
 # Training and Testing
 
 ## Resnet18
-1. 
+1. Clone the Repository
+2. Download and Extract the dataset into the project folder
+3. Put the dataset in a folder chest_xray
+4. run the preprocess.py folder
+5. run resnet18.py to train your own model or use the available models
+6. run resnet-test.py
 
-## Resnet
+## MobileNet
