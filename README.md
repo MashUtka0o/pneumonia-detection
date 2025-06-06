@@ -10,10 +10,8 @@ and pneumonia.
 
 **Model Card Submission: Friday, June 6, 2025, 11:59 PM CEST**
 
-Model Card (max. 3 pages) with: objective, data, model, training, evaluation, limitations 
 [Model Card](https://docs.google.com/document/d/1begDbBezvR3kWWZCJEFZHgpqFSggf6WnROFrXBSmaO0/edit?usp=sharing)   
-[Model Card Template](https://huggingface.co/docs/hub/en/model-cards)  
-Code (e.g., via GitHub or Colab)  
+[Model Card Template](https://arxiv.org/pdf/1810.03993) 
 
 5min group presentation  23.06.- 07.07.
 
@@ -22,50 +20,24 @@ Code (e.g., via GitHub or Colab)
 
 # Contributor
 Christopher Reinard Kohar 22210239   
-Harah Amit Doshi 22203459   
+Harsh Amit Doshi 22203459   
 Maria Matyukhina 22210692   
 Marlis Wagner 22301867  
 
-# Model Card
+# Training and Testing
 
-## Model Details
-
-* Developed in 2015 by researchers at Microsoft Research
-* Convolutional Neural Network
-* Introduces residual connections to mitigate vanishing gradients in deep networks
-
-## Intended Use
-
-* Typically uses ResNet-50 or ResNet-101 for medical imaging tasks
-* Assist radiologists in detecting pneumonia from chest X-ray images
-* Intended to be used by healthcare professionals, researchers, and medical imaging developers
-
-## Factors
-
-* Relevant factors for patients: age groups, genders, and ethnicities
-* Potential relevant factors from technical site: on X-ray machine settings, resolution, and patient positioning
-* Designed for diagnostic support, not standalone diagnosis
-
-## Metrics
-
-Tuned to balance false positives
-
-## Training Data
-
-* Chest X-RAY Images (Pneumonia) [1]
-* Data is splitted in normal (no pneumonia), pneumonia virus, and pneumonia bacteria images
-* Size has been adjusted from original dataset for better performance
-
-## Evaluation Data
-
-* Chest X-RAY Images (Pneumonia) [1]
-* Data is splitted in normal (no pneumonia) and pneumonia images
-* Size has been adjusted from original dataset for better performance
-
-## Ethical Considerations
-
-The diagnoses for the images were graded by two expert physicians before being cleared for training the AI system. In order to account for any grading errors, the evaluation set was also checked by a third expert.
-
-## Caveats and Recommendations
-
-## Quantitative Analyses
+## Resnet18 and Resnet50
+1. Clone the Repository
+2. Download and Extract the dataset into the project folder
+3. Put the dataset in a folder chest_xray
+4. run the preprocess.py folder
+5. run resnet18.py to train your own model or use the available models
+6. run resnet-test.py
+> To train resnet50, on step 5, run resnet50.py instead of resnet18.py \
+> In resnet-test.py, replace resnet18 with resnet50.
+## MobileNet
+1. Clone the Repository
+2. Download and Extract the dataset into the project folder
+3. Put the dataset in a folder chest_xray
+4. run the preprocess_for_mobilenet.py
+5. run mobilenet.py to train your own model or use the already trained model from models/mobilenet_best.h5 to see the results
