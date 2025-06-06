@@ -69,3 +69,16 @@ The diagnoses for the images were graded by two expert physicians before being c
 ## Caveats and Recommendations
 
 ## Quantitative Analyses
+
+### Resnet50
+Confusion metrics:
+
+Error Metrics:
+Accuracy: 95.23%
+Pneumonia Detection Accuracy: 95.23%
+Binary Accuracy: 0.9523
+Precision: 0.9934
+Recall (Sensitivity): 0.9409
+Specificity: 0.9832
+F1 Score: 0.9665
+Matthews Correlation Coefficient (MCC): 0.8882
