@@ -35,3 +35,8 @@ Marlis Wagner 22301867
 6. run resnet-test.py
 
 ## MobileNet
+1. Clone the Repository
+2. Download and Extract the dataset into the project folder
+3. Put the dataset in a folder chest_xray
+4. run the preprocess_for_mobilenet.py
+5. run mobilenet.py to train your own model or use the already trained model from models/mobilenet_best.h5 to see the results
