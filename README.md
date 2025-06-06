@@ -10,10 +10,8 @@ and pneumonia.
 
 **Model Card Submission: Friday, June 6, 2025, 11:59 PM CEST**
 
-Model Card (max. 3 pages) with: objective, data, model, training, evaluation, limitations 
 [Model Card](https://docs.google.com/document/d/1begDbBezvR3kWWZCJEFZHgpqFSggf6WnROFrXBSmaO0/edit?usp=sharing)   
-[Model Card Template](https://huggingface.co/docs/hub/en/model-cards)  
-Code (e.g., via GitHub or Colab)  
+[Model Card Template](https://arxiv.org/pdf/1810.03993) 
 
 5min group presentation  23.06.- 07.07.
 
