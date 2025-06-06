@@ -22,7 +22,7 @@ Code (e.g., via GitHub or Colab)
 
 # Contributor
 Christopher Reinard Kohar 22210239   
-Harah Amit Doshi 22203459   
+Harsh Amit Doshi 22203459   
 Maria Matyukhina 22210692   
 Marlis Wagner 22301867  
 
