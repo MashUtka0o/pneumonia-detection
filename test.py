@@ -42,6 +42,10 @@ def evaluate_model(model, test_loader):
             all_preds.extend(preds.cpu().numpy())
 
     # Calculate binary accuracy for pneumonia detection (Normal vs Pneumonia)
+    accuracy = correct / total
+
+    print(accuracy)
+
     binary_labels = [0 if l == 0 else 1 for l in all_labels]
     binary_preds = [0 if p == 0 else 1 for p in all_preds]
     pneumonia_accuracy = np.mean(np.array(binary_labels) == np.array(binary_preds))

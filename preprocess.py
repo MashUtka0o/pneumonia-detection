@@ -39,7 +39,7 @@ def combine_dataset():
                 ext = os.path.splitext(fname)[1]
                 new_fname = f"{counters[dst_label]}{ext}"
                 counters[dst_label] += 1
-                shutil.move(src_path, os.path.join(dst_dir, new_fname))
+                shutil.copy(src_path, os.path.join(dst_dir, new_fname))
 
 
 def split_train_test():
@@ -78,4 +78,5 @@ def split_train_test():
 
     print("Dataset successfully split into train/val/test!")
 
+combine_dataset()
 split_train_test()
